@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:viewModel="clr-namespace:ExpensesApp.ViewModels;assembly=ExpensesApp"
+             x:Class="ExpensesApp.Views.NewExpensePage"
+             ios:Page.UseSafeArea="True">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <viewModel:NewExpenseViewModel x:Key="NewExpenseViewModel" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Save"
+            Command="{Binding Source={StaticResource NewExpenseViewModel}, Path=SaveExpenseCommand}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+            <TableView
+                x:Name="TableView">
+                <TableRoot>
+                    <TableSection>
+                        <EntryCell 
+                            Label="Name:" 
+                            Placeholder="Expense name" 
+                            Text="{Binding Source={StaticResource NewExpenseViewModel}, Path=ExpenseName, Mode=TwoWay}" />
+                        <EntryCell
+                            Label="Amount:"
+                            Keyboard="Numeric"
+                            Text="{Binding Source={StaticResource NewExpenseViewModel}, Path=ExpenseAmount, Mode=TwoWay}" />
+                        <EntryCell 
+                            Label="Description:"
+                            Placeholder="Short description"
+                            Text="{Binding Source={StaticResource NewExpenseViewModel}, Path=ExpenseDescription, Mode=TwoWay}"/>
+                        <ViewCell>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Margin="16, 0">
+                                <Label
+                                    VerticalOptions="Center"
+                                    Text="Date:" />
+                                <DatePicker 
+                                    Date="{Binding Source={StaticResource NewExpenseViewModel}, Path=ExpenseDate, Mode=TwoWay}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Margin="16, 0">
+                                <Label 
+                                    VerticalOptions="Center"
+                                    Text="Category:"/>
+                                <Picker 
+                                    SelectedItem="{Binding Source={StaticResource NewExpenseViewModel}, Path=ExpenseCategory, Mode=TwoWay}"
+                                    ItemsSource="{Binding Source={StaticResource NewExpenseViewModel}, Path=Categories}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+    </ContentPage.Content>
+</ContentPage>

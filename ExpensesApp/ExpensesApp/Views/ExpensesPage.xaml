@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:viewModel="clr-namespace:ExpensesApp.ViewModels;assembly=ExpensesApp"
+             x:Class="ExpensesApp.Views.ExpensesPage"
+             ios:Page.UseSafeArea="True">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <viewModel:ExpensesViewModel x:Key="ExpensesViewModel" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sort" Command="{Binding Source={StaticResource ExpensesViewModel}, Path=OpenSortPageCommand}"/>
+        <ToolbarItem
+            IconImageSource="add.png"
+            Command="{Binding Source={StaticResource ExpensesViewModel}, Path=AddExpenseCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar Placeholder="Search"
+                       Text="{Binding Source={StaticResource ExpensesViewModel}, Path=FilterString, Mode=OneWayToSource}"
+                       TextChanged="SearchBar_OnTextChanged" />
+            <ListView
+                ItemsSource="{Binding Source={StaticResource ExpensesViewModel}, Path=FilteredAndSortedExpenses}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell
+                            Text="{Binding Name}"
+                            StyleId="checkmark"
+                            Detail="{Binding Category}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>

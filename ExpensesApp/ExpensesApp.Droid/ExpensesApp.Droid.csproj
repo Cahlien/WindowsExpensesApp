@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{89EC71E9-AA6E-45FA-ABE2-07CAE608EF7A}</ProjectGuid>
+        <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+        <OutputType>Library</OutputType>
+        <RootNamespace>ExpensesApp.Droid</RootNamespace>
+        <AssemblyName>ExpensesApp.Droid</AssemblyName>
+        <AndroidApplication>True</AndroidApplication>
+        <AndroidResgenFile>Resources\resource.designer.cs</AndroidResgenFile>
+        <AndroidResgenClass>Resource</AndroidResgenClass>
+        <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+        <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+        <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+        <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
+        <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
+        <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>portable</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug</OutputPath>
+        <DefineConstants>DEBUG;</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <AndroidLinkMode>None</AndroidLinkMode>
+        <AndroidSupportedAbis>armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release</OutputPath>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <AndroidManagedSymbols>true</AndroidManagedSymbols>
+        <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Mono.Android" />
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="MainActivity.cs" />
+        <Compile Include="Renderers\CustomProgressBarRenderer.cs" />
+        <Compile Include="Renderers\CustomTextCellRenderer.cs" />
+        <Compile Include="Renderers\CustomViewCellRenderer.cs" />
+        <Compile Include="Resources\resource.designer.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Shared\Share.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="Resources\AboutResources.txt" />
+        <None Include="Assets\AboutAssets.txt" />
+        <None Include="Properties\AndroidManifest.xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <AndroidResource Include="Resources\drawable-hdpi\add.png">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </AndroidResource>
+        <AndroidResource Include="Resources\drawable-hdpi\category.png">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </AndroidResource>
+        <AndroidResource Include="Resources\drawable-hdpi\expenses.png">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </AndroidResource>
+        <AndroidResource Include="Resources\drawable-mdpi\add.png" />
+        <AndroidResource Include="Resources\drawable-mdpi\category.png" />
+        <AndroidResource Include="Resources\drawable-mdpi\expenses.png" />
+        <AndroidResource Include="Resources\drawable-xhdpi\add.png" />
+        <AndroidResource Include="Resources\drawable-xhdpi\category.png" />
+        <AndroidResource Include="Resources\drawable-xhdpi\expenses.png" />
+        <AndroidResource Include="Resources\drawable-xxhdpi\add.png" />
+        <AndroidResource Include="Resources\drawable-xxhdpi\category.png" />
+        <AndroidResource Include="Resources\drawable-xxhdpi\expenses.png" />
+        <AndroidResource Include="Resources\drawable-xxxhdpi\add.png" />
+        <AndroidResource Include="Resources\drawable-xxxhdpi\category.png" />
+        <AndroidResource Include="Resources\drawable-xxxhdpi\expenses.png" />
+        <AndroidResource Include="Resources\layout\Tabbar.axml" />
+        <AndroidResource Include="Resources\layout\Toolbar.axml" />
+        <EmbeddedResource Include="Resources\resource.designer.cs" />
+        <AndroidResource Include="Resources\values\styles.xml" />
+        <AndroidResource Include="Resources\values\colors.xml" />
+        <AndroidResource Include="Resources\xml\file_provider_paths.xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\ExpensesApp\ExpensesApp.csproj">
+            <Project>{F8A3BD67-FBF9-4637-A020-B41B110CBEEF}</Project>
+            <Name>ExpensesApp</Name>
+        </ProjectReference>
+    </ItemGroup>
+    <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+</Project>
