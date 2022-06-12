@@ -36,8 +36,7 @@
                         <TextCell
                             Text="{Binding Name}"
                             StyleId="checkmark"
-                            Detail="{Binding Category}">
-                        </TextCell>
+                            Detail="{Binding Category}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
 

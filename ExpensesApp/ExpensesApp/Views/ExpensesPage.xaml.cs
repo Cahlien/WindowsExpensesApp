@@ -1,12 +1,11 @@
-﻿using System.Windows.Input;
-using ExpensesApp.ViewModels;
+﻿using ExpensesApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ExpensesApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExpensesPage : ContentPage
+    public partial class ExpensesPage
     {
         public ExpensesPage()
         {

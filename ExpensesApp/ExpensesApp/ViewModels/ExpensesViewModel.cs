@@ -48,7 +48,6 @@ namespace ExpensesApp.ViewModels
         {
             if (FilterString != null)
             {
-
                 var filterTerms = FilterString.ToLowerInvariant().Split(' ');
                 if (filterTerms.Any())
                 {
@@ -62,9 +61,9 @@ namespace ExpensesApp.ViewModels
                     }
 
                     filteredExpenses = SortExpenses(filteredExpenses);
-                    
+
                     Expenses.Clear();
-                    
+
                     foreach (var expense in filteredExpenses) Expenses.Add(expense);
                 }
             }

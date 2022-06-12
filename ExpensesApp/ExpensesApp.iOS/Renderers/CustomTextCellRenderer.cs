@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(TextCell), typeof(CustomTextCellRenderer))]
+
 namespace ExpensesApp.iOS.Renderers
 {
     public class CustomTextCellRenderer : TextCellRenderer

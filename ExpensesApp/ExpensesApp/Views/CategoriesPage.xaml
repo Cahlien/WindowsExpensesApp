@@ -6,17 +6,17 @@
              xmlns:viewModel="clr-namespace:ExpensesApp.ViewModels;assembly=ExpensesApp"
              x:Class="ExpensesApp.Views.CategoriesPage"
              ios:Page.UseSafeArea="True">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <viewModel:CategoriesViewModel x:Key="CategoriesViewModel" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Export" Command="{Binding Source={StaticResource CategoriesViewModel}, Path=ExportCommand}"/>
+        <ToolbarItem Text="Export" Command="{Binding Source={StaticResource CategoriesViewModel}, Path=ExportCommand}" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
         <ListView
             ItemsSource="{Binding Source={StaticResource CategoriesViewModel}, Path=CategoryExpensesCollection}">
@@ -25,9 +25,9 @@
                     <ViewCell>
                         <StackLayout
                             Margin="16, 0">
-                            <Label 
+                            <Label
                                 Text="{Binding Category}" />
-                            <ProgressBar 
+                            <ProgressBar
                                 Progress="{Binding ExpensesPercentage}" />
                         </StackLayout>
                     </ViewCell>

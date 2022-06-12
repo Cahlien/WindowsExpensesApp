@@ -14,7 +14,7 @@ namespace ExpensesApp.Models
         public float Amount { get; set; }
 
         [MaxLength(25)] public string Description { get; set; }
-        
+
         public string Category { get; set; }
 
         public DateTime Date { get; set; }
@@ -36,7 +36,7 @@ namespace ExpensesApp.Models
                 return conn.Table<Expense>().ToList();
             }
         }
-        
+
         public static List<Expense> GetExpenses(string category)
         {
             using (var conn = new SQLiteConnection(App.DatabasePath))

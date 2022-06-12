@@ -26,8 +26,8 @@ namespace ExpensesApp.iOS
             var dbName = "expenses_db.db3";
             var folderPath = Path.Combine(Environment.GetFolderPath(
                     Environment.SpecialFolder.Personal),
-                    "..",
-                    "Library");
+                "..",
+                "Library");
 
             var fullPath = Path.Combine(folderPath, dbName);
             LoadApplication(new App(fullPath));

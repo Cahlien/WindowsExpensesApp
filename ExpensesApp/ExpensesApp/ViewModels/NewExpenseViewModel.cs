@@ -8,14 +8,11 @@ namespace ExpensesApp.ViewModels
 {
     public class NewExpenseViewModel : INotifyPropertyChanged
     {
-        private float expenseAmount;
-
-        private string expenseCategory;
-
-        private DateTime expenseDate;
-
-        private string expenseDescription;
-        private string expenseName;
+        private float _expenseAmount;
+        private string _expenseCategory;
+        private DateTime _expenseDate;
+        private string _expenseDescription;
+        private string _expenseName;
 
         public NewExpenseViewModel()
         {
@@ -27,55 +24,55 @@ namespace ExpensesApp.ViewModels
 
         public string ExpenseName
         {
-            get => expenseName;
+            get => _expenseName;
 
             set
             {
-                expenseName = value;
+                _expenseName = value;
                 OnPropertyChanged("ExpenseName");
             }
         }
 
         public string ExpenseDescription
         {
-            get => expenseDescription;
+            get => _expenseDescription;
 
             set
             {
-                expenseDescription = value;
+                _expenseDescription = value;
                 OnPropertyChanged("ExpenseDescription");
             }
         }
 
         public float ExpenseAmount
         {
-            get => expenseAmount;
+            get => _expenseAmount;
 
             set
             {
-                expenseAmount = value;
+                _expenseAmount = value;
                 OnPropertyChanged("ExpenseAmount");
             }
         }
 
         public DateTime ExpenseDate
         {
-            get => expenseDate;
+            get => _expenseDate;
 
             set
             {
-                expenseDate = value;
+                _expenseDate = value;
                 OnPropertyChanged("ExpenseDate");
             }
         }
 
         public string ExpenseCategory
         {
-            get => expenseCategory;
+            get => _expenseCategory;
 
             set
             {
-                expenseCategory = value;
+                _expenseCategory = value;
                 OnPropertyChanged("ExpenseCategory");
             }
         }
@@ -97,7 +94,7 @@ namespace ExpensesApp.ViewModels
             {
                 Name = ExpenseName,
                 Amount = ExpenseAmount,
-                Category = expenseCategory,
+                Category = _expenseCategory,
                 Date = ExpenseDate,
                 Description = ExpenseDescription
             };

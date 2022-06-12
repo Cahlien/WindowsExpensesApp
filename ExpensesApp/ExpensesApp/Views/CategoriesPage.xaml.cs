@@ -1,24 +1,23 @@
 ﻿using ExpensesApp.ViewModels;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ExpensesApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CategoriesPage : ContentPage
+    public partial class CategoriesPage
     {
-        public CategoriesViewModel CategoriesViewModel { get; set; }
-        
         public CategoriesPage()
         {
             InitializeComponent();
             CategoriesViewModel = Resources["CategoriesViewModel"] as CategoriesViewModel;
         }
 
+        public CategoriesViewModel CategoriesViewModel { get; set; }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            this.CategoriesViewModel.GetExpensesPerCategory();
+            CategoriesViewModel.GetExpensesPerCategory();
         }
     }
 }

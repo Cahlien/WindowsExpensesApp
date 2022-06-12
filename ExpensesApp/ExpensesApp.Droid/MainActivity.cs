@@ -1,32 +1,29 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 using Environment = System.Environment;
 
-namespace ExpensesApp.Droid
+namespace ExpensesApp.Droid;
+
+[Activity(Label = "ExpensesApp", Theme = "@style/MainTheme", MainLauncher = true,
+    ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+public class MainActivity : FormsAppCompatActivity
 {
-    [Activity(Label = "ExpensesApp", Theme = "@style/MainTheme", MainLauncher = true,
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    protected override void OnCreate(Bundle savedInstanceState)
     {
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
+        TabLayoutResource = Resource.Layout.Tabbar;
+        ToolbarResource = Resource.Layout.Toolbar;
 
-            base.OnCreate(savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+        base.OnCreate(savedInstanceState);
+        Forms.Init(this, savedInstanceState);
 
-            var dbName = "expenses_db.db3";
-            var folderPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            var fullPath = Path.Combine(folderPath, dbName);
-            
-            LoadApplication(new App(fullPath));
-        }
+        var dbName = "expenses_db.db3";
+        var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        var fullPath = Path.Combine(folderPath, dbName);
+
+        LoadApplication(new App(fullPath));
     }
 }

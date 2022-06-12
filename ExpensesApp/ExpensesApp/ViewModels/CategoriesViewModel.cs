@@ -10,10 +10,6 @@ namespace ExpensesApp.ViewModels
 {
     public class CategoriesViewModel
     {
-        public ObservableCollection<string> Categories { get; set; }
-        public ObservableCollection<CategoryExpenses> CategoryExpensesCollection { get; set; }
-        public Command ExportCommand { get; set; }
-        
         public CategoriesViewModel()
         {
             Categories = new ObservableCollection<string>();
@@ -23,6 +19,10 @@ namespace ExpensesApp.ViewModels
             ExportCommand = new Command(ShareReport);
         }
 
+        public ObservableCollection<string> Categories { get; set; }
+        public ObservableCollection<CategoryExpenses> CategoryExpensesCollection { get; set; }
+        public Command ExportCommand { get; set; }
+
         private async void ShareReport()
         {
             var fileSystem = FileSystem.Current;
@@ -31,15 +31,12 @@ namespace ExpensesApp.ViewModels
 
             var txtFile = await reportsFolder.CreateFileAsync("report.txt", CreationCollisionOption.ReplaceExisting);
 
-            using (StreamWriter sw = new StreamWriter(txtFile.Path))
+            using (var sw = new StreamWriter(txtFile.Path))
             {
-                foreach (var ce in CategoryExpensesCollection)
-                {
-                    sw.WriteLine($"{ce.Category} - {ce.ExpensesPercentage}");
-                }
+                foreach (var ce in CategoryExpensesCollection) sw.WriteLine($"{ce.Category} - {ce.ExpensesPercentage}");
             }
-            
-            IShare shareDependency = DependencyService.Get<IShare>();
+
+            var shareDependency = DependencyService.Get<IShare>();
             await shareDependency.Show("Expense Report", "Here is your expense report", txtFile.Path);
         }
 
@@ -58,32 +55,28 @@ namespace ExpensesApp.ViewModels
         public void GetExpensesPerCategory()
         {
             CategoryExpensesCollection.Clear();
-            float totalExpensesAmount = Expense.TotalExpensesAmount();
-            
+            var totalExpensesAmount = Expense.TotalExpensesAmount();
+
             foreach (var category in Categories)
             {
                 var expenses = Expense.GetExpenses(category);
-                float expensesAmountInCategory = expenses.Sum(e => e.Amount);
+                var expensesAmountInCategory = expenses.Sum(e => e.Amount);
 
-                if (totalExpensesAmount == 0)
-                {
-                    totalExpensesAmount = 1;
-                }
-                var categoryExpense = new CategoryExpenses()
+                if (totalExpensesAmount == 0) totalExpensesAmount = 1;
+                var categoryExpense = new CategoryExpenses
                 {
                     Category = category,
                     ExpensesPercentage = expensesAmountInCategory / totalExpensesAmount
                 };
-                
+
                 CategoryExpensesCollection.Add(categoryExpense);
             }
         }
+
         public class CategoryExpenses
         {
             public string Category { get; set; }
             public float ExpensesPercentage { get; set; }
-            
-            
         }
     }
 }

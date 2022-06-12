@@ -1,8 +1,6 @@
-﻿using Xamarin.Forms;
-
-namespace ExpensesApp.Views
+﻿namespace ExpensesApp.Views
 {
-    public partial class MainPage : TabbedPage
+    public partial class MainPage
     {
         public MainPage()
         {

@@ -6,18 +6,17 @@ using Xamarin.Forms.Xaml;
 
 namespace ExpensesApp
 {
-    public partial class App : Application
+    public partial class App
     {
         public static string DatabasePath;
-        
+
         public App(string databasePath)
         {
             InitializeComponent();
-            
+
             DatabasePath = databasePath;
-            
+
             MainPage = new NavigationPage(new MainPage());
-            
         }
 
         protected override void OnStart()

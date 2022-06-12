@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="X5k-f2-b5h">
+<document initialViewController="X5k-f2-b5h" propertyAccessControl="none" systemVersion="13F34"
+    targetRuntime="iOS.CocoaTouch" toolsVersion="6245" type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB"
+    useAutolayout="YES" useTraitCollections="YES" version="3.0">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238" />
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -9,31 +11,36 @@
             <objects>
                 <viewController id="X5k-f2-b5h" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Y8P-hJ-Z43"/>
-                        <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
+                        <viewControllerLayoutGuide id="Y8P-hJ-Z43" type="top" />
+                        <viewControllerLayoutGuide id="9ZL-r4-8FZ" type="bottom" />
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <view contentMode="scaleToFill" id="yd7-JS-zBw" key="view">
+                        <rect height="600" key="frame" width="600" x="0.0" y="0.0" />
+                        <autoresizingMask heightSizable="YES" key="autoresizingMask" widthSizable="YES" />
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="Icon-60.png" translatesAutoresizingMaskIntoConstraints="NO" id="23">
-                                <rect key="frame" x="270" y="270" width="60" height="60"/>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                            <imageView contentMode="scaleToFill" id="23" image="Icon-60.png" misplaced="YES"
+                                translatesAutoresizingMaskIntoConstraints="NO" userInteractionEnabled="NO">
+                                <rect height="60" key="frame" width="60" x="270" y="270" />
+                                <rect height="0.0" key="contentStretch" width="0.0" x="0.0" y="0.0" />
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                        <color alpha="1" blue="0.85882352941176465" colorSpace="calibratedRGB"
+                            green="0.59607843137254901" key="backgroundColor" red="0.20392156862745098" />
                         <constraints>
-                            <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
-                            <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
+                            <constraint firstAttribute="centerY" firstItem="23" id="39" priority="1"
+                                secondAttribute="centerY" secondItem="yd7-JS-zBw" />
+                            <constraint firstAttribute="centerX" firstItem="23" id="41" priority="1"
+                                secondAttribute="centerX" secondItem="yd7-JS-zBw" />
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder id="XAI-xm-WK6" placeholderIdentifier="IBFirstResponder" sceneMemberID="firstResponder"
+                    userLabel="First Responder" />
             </objects>
-            <point key="canvasLocation" x="349" y="339"/>
+            <point key="canvasLocation" x="349" y="339" />
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-60.png" width="180" height="180"/>
+        <image name="Icon-60.png" height="180" width="180" />
     </resources>
 </document>

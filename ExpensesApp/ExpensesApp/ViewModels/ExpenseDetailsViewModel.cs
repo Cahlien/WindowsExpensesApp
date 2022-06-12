@@ -5,19 +5,16 @@ namespace ExpensesApp.ViewModels
 {
     public class ExpenseDetailsViewModel : INotifyPropertyChanged
     {
-        private Expense expense;
+        private Expense _expense;
+
         public Expense Expense
         {
-            get { return expense; }
+            get => _expense;
             set
             {
-                expense = value;
+                _expense = value;
                 OnPropertyChanged("Expense");
             }
-        }
-
-        public ExpenseDetailsViewModel()
-        {
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
