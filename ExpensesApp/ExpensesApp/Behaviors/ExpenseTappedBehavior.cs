@@ -1,13 +1,13 @@
+﻿using System;
 using ExpensesApp.Models;
 using ExpensesApp.Views;
 using Xamarin.Forms;
 
 namespace ExpensesApp.Behaviors
 {
-    public class ListViewBehavior : Behavior<ListView>
+    public class ExpenseTappedBehavior : Behavior<ListView>
     {
-        private ListView listView;
-
+        ListView listView;
         protected override void OnAttachedTo(ListView bindable)
         {
             base.OnAttachedTo(bindable);
@@ -16,9 +16,9 @@ namespace ExpensesApp.Behaviors
             listView.ItemSelected += ListView_ItemSelected;
         }
 
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var selectedExpense = listView.SelectedItem as Expense;
+            Expense selectedExpense = (listView.SelectedItem) as Expense;
             Application.Current.MainPage.Navigation.PushAsync(new ExpenseDetailsPage(selectedExpense));
         }
 

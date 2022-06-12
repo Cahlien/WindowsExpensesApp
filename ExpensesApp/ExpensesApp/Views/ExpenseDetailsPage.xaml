@@ -2,12 +2,17 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:ExpensesApp.ViewModels;assembly=ExpensesApp"
              x:Class="ExpensesApp.Views.ExpenseDetailsPage">
+    
+    <ContentPage.Resources>
+        <viewModel:ExpenseDetailsViewModel x:Key="ExpenseDetailsViewModel" />
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Hello, world!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <TableView>
+
+            </TableView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

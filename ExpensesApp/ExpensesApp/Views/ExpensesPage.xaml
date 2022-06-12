@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModel="clr-namespace:ExpensesApp.ViewModels;assembly=ExpensesApp"
+             xmlns:behaviors="clr-namespace:ExpensesApp.Behaviors;assembly=ExpensesApp"
              x:Class="ExpensesApp.Views.ExpensesPage"
              ios:Page.UseSafeArea="True">
 
@@ -26,14 +27,20 @@
                        TextChanged="SearchBar_OnTextChanged" />
             <ListView
                 ItemsSource="{Binding Source={StaticResource ExpensesViewModel}, Path=Expenses}">
+                <ListView.Behaviors>
+                    <behaviors:ExpenseTappedBehavior />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
+
                     <DataTemplate>
                         <TextCell
                             Text="{Binding Name}"
                             StyleId="checkmark"
-                            Detail="{Binding Category}" />
+                            Detail="{Binding Category}">
+                        </TextCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+
             </ListView>
         </StackLayout>
 
