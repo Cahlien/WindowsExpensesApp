@@ -19,14 +19,12 @@ namespace ExpensesApp.ViewModels
             Orderby = "date";
             OrderDirection = "desc";
             GetExpenses();
-            FilteredAndSortedExpenses = new ObservableCollection<Expense>(Expenses);
             FilterAndSortExpenses();
         }
 
 
         public ObservableCollection<Expense> Expenses { get; set; }
         public ICommand AddExpenseCommand { get; set; }
-        public ObservableCollection<Expense> FilteredAndSortedExpenses { get; set; }
         public string FilterString { get; set; }
         public string Orderby { get; set; }
         public string OrderDirection { get; set; }
@@ -48,33 +46,34 @@ namespace ExpensesApp.ViewModels
 
         public void FilterAndSortExpenses()
         {
-            if (FilterString == null) return;
-            var filterTerms = FilterString.ToLowerInvariant().Split(' ');
-            if (filterTerms.Any())
+            if (FilterString != null)
             {
-                FilteredAndSortedExpenses.Clear();
-                IEnumerable<Expense> filteredExpenses = null;
 
-                foreach (var term in filterTerms)
+                var filterTerms = FilterString.ToLowerInvariant().Split(' ');
+                if (filterTerms.Any())
                 {
-                    if (IsSortProperty(term)) continue;
+                    IEnumerable<Expense> filteredExpenses = null;
 
-                    filteredExpenses = SetFilters(term);
+                    foreach (var term in filterTerms)
+                    {
+                        if (IsSortProperty(term)) continue;
+
+                        filteredExpenses = SetFilters(term);
+                    }
+
+                    filteredExpenses = SortExpenses(filteredExpenses);
+                    
+                    Expenses.Clear();
+                    
+                    foreach (var expense in filteredExpenses) Expenses.Add(expense);
                 }
-                
-                filteredExpenses = SortExpenses(filteredExpenses);
-
-                foreach (var expense in filteredExpenses) FilteredAndSortedExpenses.Add(expense);
             }
         }
 
         private IEnumerable<Expense> SortExpenses(IEnumerable<Expense> filteredExpenses)
         {
-            if (filteredExpenses == null)
-            {
-                filteredExpenses = new List<Expense>(Expenses);
-            }
-            
+            if (filteredExpenses == null) filteredExpenses = Expense.GetExpenses();
+
             switch (Orderby)
             {
                 case "name" when OrderDirection.Equals("asc"):
@@ -108,7 +107,7 @@ namespace ExpensesApp.ViewModels
 
         private IEnumerable<Expense> SetFilters(string term)
         {
-            IEnumerable<Expense> filteredExpenses;
+            IEnumerable<Expense> filteredExpenses = Expense.GetExpenses();
             var floatString = float.TryParse(term, NumberStyles.Any, CultureInfo.CurrentCulture,
                 out var outFloat);
 
@@ -116,7 +115,7 @@ namespace ExpensesApp.ViewModels
                 DateTimeStyles.None, out var outDate);
 
             if (floatString || dateString)
-                filteredExpenses = Expenses.Where(expense =>
+                filteredExpenses = filteredExpenses.Where(expense =>
                     expense.Name.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
                     expense.Description.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
                     expense.Category.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
@@ -124,7 +123,7 @@ namespace ExpensesApp.ViewModels
                         ? Math.Abs(expense.Amount - outFloat) < 0.001
                         : expense.Date.Date.Equals(outDate.Date));
             else
-                filteredExpenses = Expenses.Where(expense =>
+                filteredExpenses = filteredExpenses.Where(expense =>
                     expense.Name.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
                     expense.Description.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
                     expense.Category.ToLowerInvariant().Contains(term.ToLowerInvariant()));

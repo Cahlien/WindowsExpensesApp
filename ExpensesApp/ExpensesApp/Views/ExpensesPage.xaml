@@ -14,7 +14,6 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Sort" Command="{Binding Source={StaticResource ExpensesViewModel}, Path=OpenSortPageCommand}"/>
         <ToolbarItem
             IconImageSource="add.png"
             Command="{Binding Source={StaticResource ExpensesViewModel}, Path=AddExpenseCommand}" />
@@ -26,7 +25,7 @@
                        Text="{Binding Source={StaticResource ExpensesViewModel}, Path=FilterString, Mode=OneWayToSource}"
                        TextChanged="SearchBar_OnTextChanged" />
             <ListView
-                ItemsSource="{Binding Source={StaticResource ExpensesViewModel}, Path=FilteredAndSortedExpenses}">
+                ItemsSource="{Binding Source={StaticResource ExpensesViewModel}, Path=Expenses}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell
