@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace ExpensesApp.ViewModels
 {
-    public class ExpensesViewModel 
+    public class ExpensesViewModel
     {
         public ExpensesViewModel()
         {
@@ -18,11 +18,13 @@ namespace ExpensesApp.ViewModels
             AddExpenseCommand = new Command(AddExpense);
             OpenSortPageCommand = new Command(OpenSortPage);
             CloseSortPageCommand = new Command(CloseSortPage);
+            Orderby = "date";
+            OrderDirection = "desc";
             GetExpenses();
             FilteredAndSortedExpenses = new ObservableCollection<Expense>(Expenses);
             FilterAndSortExpenses();
         }
-        
+
 
         public ObservableCollection<Expense> Expenses { get; set; }
         public ICommand AddExpenseCommand { get; set; }
@@ -42,7 +44,7 @@ namespace ExpensesApp.ViewModels
         {
             await Application.Current.MainPage.Navigation.PopModalAsync();
         }
-        
+
         public void GetExpenses()
         {
             var expenses = Expense.GetExpenses();
@@ -68,29 +70,99 @@ namespace ExpensesApp.ViewModels
 
                 foreach (var term in filterTerms)
                 {
-                    var floatString = float.TryParse(term, NumberStyles.Any, CultureInfo.CurrentCulture,
-                        out var outFloat);
+                    if (IsSortProperty(term)) continue;
 
-                    var dateString = DateTime.TryParse(term, CultureInfo.CurrentCulture,
-                        DateTimeStyles.None, out var outDate);
-
-                    if (floatString || dateString)
-                        filteredExpenses = Expenses.Where(expense =>
-                            expense.Name.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
-                            expense.Description.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
-                            expense.Category.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
-                            floatString
-                                ? Math.Abs(expense.Amount - outFloat) < 0.001
-                                : expense.Date.Date.Equals(outDate.Date));
-                    else
-                        filteredExpenses = Expenses.Where(expense =>
-                            expense.Name.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
-                            expense.Description.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
-                            expense.Category.ToLowerInvariant().Contains(term.ToLowerInvariant()));
+                    filteredExpenses = SetFilters(term);
                 }
+                
+                filteredExpenses = SortExpenses(filteredExpenses);
 
                 foreach (var expense in filteredExpenses) FilteredAndSortedExpenses.Add(expense);
             }
+        }
+
+        private IEnumerable<Expense> SortExpenses(IEnumerable<Expense> filteredExpenses)
+        {
+            if (filteredExpenses == null)
+            {
+                filteredExpenses = new List<Expense>(Expenses);
+            }
+            
+            switch (Orderby)
+            {
+                case "name" when OrderDirection.Equals("asc"):
+                    filteredExpenses = filteredExpenses.OrderBy(expense => expense.Name);
+                    break;
+                case "name" when OrderDirection.Equals("desc"):
+                    filteredExpenses = filteredExpenses.OrderByDescending(expense => expense.Name);
+                    break;
+                case "date" when OrderDirection.Equals("asc"):
+                    filteredExpenses = filteredExpenses.OrderBy(expense => expense.Date);
+                    break;
+                case "date" when OrderDirection.Equals("desc"):
+                    filteredExpenses = filteredExpenses.OrderByDescending(expense => expense.Date);
+                    break;
+                case "amount" when OrderDirection.Equals("asc"):
+                    filteredExpenses = filteredExpenses.OrderBy(expense => expense.Amount);
+                    break;
+                case "amount" when OrderDirection.Equals("desc"):
+                    filteredExpenses = filteredExpenses.OrderByDescending(expense => expense.Amount);
+                    break;
+                case "category" when OrderDirection.Equals("asc"):
+                    filteredExpenses = filteredExpenses.OrderBy(expense => expense.Category);
+                    break;
+                case "category" when OrderDirection.Equals("desc"):
+                    filteredExpenses = filteredExpenses.OrderByDescending(expense => expense.Category);
+                    break;
+            }
+
+            return filteredExpenses;
+        }
+
+        private IEnumerable<Expense> SetFilters(string term)
+        {
+            IEnumerable<Expense> filteredExpenses;
+            var floatString = float.TryParse(term, NumberStyles.Any, CultureInfo.CurrentCulture,
+                out var outFloat);
+
+            var dateString = DateTime.TryParse(term, CultureInfo.CurrentCulture,
+                DateTimeStyles.None, out var outDate);
+
+            if (floatString || dateString)
+                filteredExpenses = Expenses.Where(expense =>
+                    expense.Name.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
+                    expense.Description.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
+                    expense.Category.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
+                    floatString
+                        ? Math.Abs(expense.Amount - outFloat) < 0.001
+                        : expense.Date.Date.Equals(outDate.Date));
+            else
+                filteredExpenses = Expenses.Where(expense =>
+                    expense.Name.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
+                    expense.Description.ToLowerInvariant().Contains(term.ToLowerInvariant()) ||
+                    expense.Category.ToLowerInvariant().Contains(term.ToLowerInvariant()));
+            return filteredExpenses;
+        }
+
+        private bool IsSortProperty(string term)
+        {
+            if (term.ToLowerInvariant().Equals("date") ||
+                term.ToLowerInvariant().Equals("amount") ||
+                term.ToLowerInvariant().Equals("category") ||
+                term.ToLowerInvariant().Equals("name"))
+            {
+                Orderby = term;
+                return true;
+            }
+
+            if (term.ToLowerInvariant().Equals("asc") ||
+                term.ToLowerInvariant().Equals("desc"))
+            {
+                OrderDirection = term;
+                return true;
+            }
+
+            return false;
         }
     }
 }
