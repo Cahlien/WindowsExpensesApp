@@ -23,10 +23,7 @@ namespace ExpensesApp.ViewModels
             Categories = new ObservableCollection<string>();
             GetCategories();
             SaveExpenseCommand = new Command(InsertExpense);
-            ExpenseStatuses = new ObservableCollection<ExpenseStatus>();
         }
-
-        public ObservableCollection<ExpenseStatus> ExpenseStatuses { get; set; }
 
         public string ExpenseName
         {
@@ -123,35 +120,6 @@ namespace ExpensesApp.ViewModels
             Categories.Add("Personal");
             Categories.Add("Travel");
             Categories.Add("Other");
-        }
-
-        public void GetExpenseStatus()
-        {
-            ExpenseStatuses.Clear();
-            ExpenseStatuses.Add(new ExpenseStatus
-            {
-                Name = "Random 1",
-                Status = false
-            });
-            
-            ExpenseStatuses.Add(new ExpenseStatus
-            {
-                Name = "Random 2",
-                Status = true
-            });
-            
-            ExpenseStatuses.Add(new ExpenseStatus
-            {
-                Name = "Random 3",
-                Status = false
-            });
-        }
-
-        public class ExpenseStatus
-        {
-            public string Name { get; set; }
-
-            public bool Status { get; set; }
         }
     }
 }

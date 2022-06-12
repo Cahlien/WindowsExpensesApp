@@ -19,32 +19,5 @@ namespace ExpensesApp.Views
 
             ViewModel = Resources["NewExpenseViewModel"] as NewExpenseViewModel;
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            
-            ViewModel.GetExpenseStatus();
-            
-            var section = new TableSection("Statuses");
-            
-            for(var i = 0; i < ViewModel.ExpenseStatuses.Count; i++)
-            {
-                var cell = new SwitchCell {Text = ViewModel.ExpenseStatuses[i].Name};
-
-                Binding binding = new Binding();
-                binding.Source = ViewModel.ExpenseStatuses[i];
-                binding.Path = "Status";
-                binding.Mode = BindingMode.TwoWay;
-                
-                cell.SetBinding(SwitchCell.OnProperty, binding);
-
-                section.Add(cell);        
-
-                
-            }
-            
-            TableView.Root.Add(section);
-        }
     }
 }

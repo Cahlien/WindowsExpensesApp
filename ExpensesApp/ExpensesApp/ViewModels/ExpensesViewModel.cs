@@ -16,8 +16,6 @@ namespace ExpensesApp.ViewModels
         {
             Expenses = new ObservableCollection<Expense>();
             AddExpenseCommand = new Command(AddExpense);
-            OpenSortPageCommand = new Command(OpenSortPage);
-            CloseSortPageCommand = new Command(CloseSortPage);
             Orderby = "date";
             OrderDirection = "desc";
             GetExpenses();
@@ -28,22 +26,11 @@ namespace ExpensesApp.ViewModels
 
         public ObservableCollection<Expense> Expenses { get; set; }
         public ICommand AddExpenseCommand { get; set; }
-        public ICommand OpenSortPageCommand { get; set; }
-        public ICommand CloseSortPageCommand { get; set; }
         public ObservableCollection<Expense> FilteredAndSortedExpenses { get; set; }
         public string FilterString { get; set; }
         public string Orderby { get; set; }
         public string OrderDirection { get; set; }
 
-        private async void OpenSortPage()
-        {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new SortPage());
-        }
-
-        private async void CloseSortPage()
-        {
-            await Application.Current.MainPage.Navigation.PopModalAsync();
-        }
 
         public void GetExpenses()
         {
