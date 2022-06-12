@@ -11,18 +11,15 @@ namespace ExpensesApp.Views
         public ExpenseDetailsPage(Expense selectedExpense)
         {
             InitializeComponent();
-            TapGestureRecognizer = new TapGestureRecognizer();
             ViewModel = Resources["ExpenseDetailsViewModel"] as ExpenseDetailsViewModel;
+            ViewModel.Expense = selectedExpense;
+        }
 
-                BindingContext = this;
+        public ExpenseDetailsPage()
+        {
+            InitializeComponent();
         }
 
         public ExpenseDetailsViewModel ViewModel { get; set; }
-        public TapGestureRecognizer TapGestureRecognizer { get; set; }
-
-        public void OnTapped(object obj)
-        {
-            DisplayAlert("Tapped", "Ok", "Cancel");
-        }
     }
 }

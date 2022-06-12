@@ -3,7 +3,7 @@ using ExpensesApp.Models;
 
 namespace ExpensesApp.ViewModels
 {
-    public class ExpenseDetailsViewModel
+    public class ExpenseDetailsViewModel : INotifyPropertyChanged
     {
         private Expense expense;
         public Expense Expense
